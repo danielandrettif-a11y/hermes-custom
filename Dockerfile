@@ -5,15 +5,14 @@ USER root
 # Codex CLI
 RUN npm install -g @openai/codex
 
-# Dependências básicas
+# Dependências
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # Google Antigravity CLI
-RUN curl -fsSL https://antigravity.google/cli/install.sh | bash
-
-# Deixa o Antigravity disponível globalmente
-ENV PATH="/root/.local/bin:${PATH}"
+RUN curl -fsSL https://antigravity.google/cli/install.sh | bash \
+    && install -m 0755 /root/.local/bin/agy /usr/local/bin/agy \
+    && /usr/local/bin/agy --version
 
 CMD ["gateway", "run"]

@@ -13,4 +13,7 @@ RUN apt-get update \
 # Google Antigravity CLI
 RUN curl -fsSL https://antigravity.google/cli/install.sh | bash
 
+# Deixa o Antigravity disponível globalmente
+ENV PATH="/root/.local/bin:${PATH}"
+
 CMD ["gateway", "run"]
